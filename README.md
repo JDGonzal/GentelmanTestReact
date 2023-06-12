@@ -43,3 +43,7 @@ npm i -D @types/node
 ```bash
 npm install @mui/x-data-grid
 ```
+9. The styledcomponents to use into ```layout.styled.component.ts```, install this
+```bash
+npm i --D @types/styled-components
+```
