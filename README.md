@@ -13,7 +13,7 @@ package name:
 react
 react-ts (typescript)
 ```
-3. Change directory y install dependencies
+3. Change directory and install dependencies
 ```bash 
 cd GentelmanTestReact
 npm install
@@ -26,4 +26,20 @@ npm install @mui/material @emotion/react @emotion/styled
 ```bash
 npm install styled-components
 ```
-
+or add in dependencies:
+```"styled-components": "^5.3.5"``` and run the command to install:
+```bash 
+npm install
+```
+6. Test is is running
+```bash
+npm run dev
+```
+7. To activate tha Alias, check this page [Setup path aliases w/ React + Vite + TS](https://dev.to/avxkim/setup-path-aliases-w-react-vite-ts-poa), the run this command:
+```bash
+npm i -D @types/node
+```
+8. To use ```data-grid```run this command:
+```bash
+npm install @mui/x-data-grid
+```
