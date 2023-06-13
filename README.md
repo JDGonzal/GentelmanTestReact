@@ -55,4 +55,7 @@ npm install react-redux
 ```bash
 npm install @reduxjs/toolkit
 ```
-
+12. For the modal we will use the RxJS
+```bash
+npm install rxjs
+```
