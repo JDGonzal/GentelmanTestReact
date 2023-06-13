@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { DataGrid, GridRenderCellParams } from "@mui/x-data-grid";
 import { People } from "@/data/people";
-import { PersonInterface } from "@/models/person-model";
+import { PersonInterface } from "@/models/person.model";
 import { Checkbox } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { addFavorite } from "@/redux/states";
 
 
 export type HomeProps = {};
@@ -10,12 +12,15 @@ export type HomeProps = {};
 const Home: React.FC<HomeProps> = () => {
   const [selectedPeople, setselectedPeople] = useState<PersonInterface[]>([])
   const pageSize=5;
+  const dispatch= useDispatch();
 
-  const findPerson=(person:PersonInterface)=> !!selectedPeople.find(p => p.id === person.id);
-  const filterPerson=(person:PersonInterface)=> selectedPeople.filter(p => p.id !== person.id);
+  const findPerson=(person:PersonInterface)=> !!selectedPeople.find((p: { id: string; }) => p.id === person.id);
+  const filterPerson=(person:PersonInterface)=> selectedPeople.filter((p: { id: string; }) => p.id !== person.id);
   
-  const handleChange=(person:PersonInterface)=>{
-    setselectedPeople(findPerson(person) ? filterPerson(person): [... selectedPeople,person])
+  const handleChange=async (person:PersonInterface)=>{
+    const fileteredPeople = await findPerson(person) ? filterPerson(person): [... selectedPeople,person];
+    await dispatch(addFavorite(fileteredPeople))
+    await setselectedPeople(fileteredPeople);
   }
   const columns = [
     {

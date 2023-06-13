@@ -43,7 +43,16 @@ npm i -D @types/node
 ```bash
 npm install @mui/x-data-grid
 ```
-9. The styledcomponents to use into ```layout.styled.component.ts```, install this
+9. The styledcomponents to use into ```layout.styled.component.ts```, install this as a "developer" component:
 ```bash
 npm i --D @types/styled-components
 ```
+10.Install React-redux .
+```bash
+npm install react-redux
+```
+11. Install redux toolking to use the redux part .
+```bash
+npm install @reduxjs/toolkit
+```
+
