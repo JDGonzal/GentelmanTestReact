@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { DataGrid, GridRenderCellParams } from "@mui/x-data-grid";
 import { PersonInterface } from "@/models/person.model";
 import { Checkbox } from "@mui/material";
@@ -9,16 +9,17 @@ import { AppStore } from "@/redux/store";
 export interface PeopleTableInterface {}
 
 const PeopleTable: React.FC<PeopleTableInterface> = () => {
-	const [selectedPeople, setselectedPeople] = useState<PersonInterface[]>([]);
+  const [selectedPeople, setselectedPeople] = useState<PersonInterface[]>([]);
   const pageSize = 5;
   const dispatch = useDispatch();
 
-  const statePeople = useSelector((store:AppStore) => store.people);
+  const statePeople = useSelector((store: AppStore) => store.people);
+  const stateFavorite = useSelector((store: AppStore) => store.favorites);
 
   const findPerson = (person: PersonInterface) =>
-    !!selectedPeople.find((p: { id: string }) => p.id === person.id);
+    !!stateFavorite.find((p: { id: string }) => p.id === person.id);
   const filterPerson = (person: PersonInterface) =>
-    selectedPeople.filter((p: { id: string }) => p.id !== person.id);
+    stateFavorite.filter((p: { id: string }) => p.id !== person.id);
 
   const handleChange = async (person: PersonInterface) => {
     const fileteredPeople = (await findPerson(person))
@@ -69,10 +70,22 @@ const PeopleTable: React.FC<PeopleTableInterface> = () => {
       MinWidth: 100,
       renderCell: (params: GridRenderCellParams) => <>{params.value}</>,
     },
+    {
+      field: "levelOfHappiness",
+      headerName: "Level",
+      flex: 1,
+      MinWidth: 50,
+      renderCell: (params: GridRenderCellParams) => <>{params.value}</>,
+    },
   ];
-	return <div >
-		
-	<DataGrid
+
+  useEffect(() =>{
+    setselectedPeople(stateFavorite);
+  }, [stateFavorite]);
+
+  return (
+    <div>
+      <DataGrid
         disableColumnSelector
         disableRowSelectionOnClick
         initialState={{
@@ -81,7 +94,8 @@ const PeopleTable: React.FC<PeopleTableInterface> = () => {
         columns={columns}
         rows={statePeople}
       />
-	</div>;
+    </div>
+  );
 };
 
 export default PeopleTable;
