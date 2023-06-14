@@ -39,7 +39,7 @@ npm run dev
 ```bash
 npm i -D @types/node
 ```
-8. To use ```data-grid```run this command:
+8. To use ```data-grid``` from [Material-ui](https://mui.com/material-ui/) run this command:
 ```bash
 npm install @mui/x-data-grid
 ```
@@ -58,4 +58,8 @@ npm install @reduxjs/toolkit
 12. For the modal we will use the RxJS
 ```bash
 npm install rxjs
+```
+13. Install the Icons from material
+```bash
+npm install @mui/icons-material
 ```
